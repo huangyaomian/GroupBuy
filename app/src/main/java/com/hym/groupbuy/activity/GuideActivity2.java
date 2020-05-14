@@ -27,7 +27,7 @@ public class GuideActivity extends Activity {
             R.mipmap.guide_1,
             R.mipmap.guide_2,
             R.mipmap.guide_3,
-            R.mipmap.guide_4
+            R.mipmap.guide_5
     };
     private List<View> mViewList = new ArrayList<>();
 
