@@ -9,6 +9,7 @@ import android.view.contentcapture.ContentCaptureSessionId;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 import com.hym.groupbuy.MainActivity;
 import com.hym.groupbuy.R;
@@ -28,10 +29,11 @@ public class SplashActivity extends BaseActivity {
     Intent intent;
 
     /**
-     * handler 登录消息
+     * handler 跳轉消息
      */
-    private static final int MESSAGE_MAIN = 1;
-    private static final int MESSAGE_GUIDE = 1;
+    private static final int MESSAGE_SECOND = 3;
+
+    private int count = 4;
 
 
     @Override
@@ -40,21 +42,32 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_start);
         ButterKnife.bind(this);
         init();
+        mHandler.sendEmptyMessage(MESSAGE_SECOND);
     }
 
     @Override
     public void init() {
-        intent = new Intent();
-        mHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(@NonNull Message message) {
-                jumpActivity(isFirst);
-                return true;
-            }
-        });
         sp = getPreferences(MODE_PRIVATE);
         isFirst = sp.getBoolean("isFirst", true);
+        intent = new Intent();
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                if (count == 1){
+                    jumpActivity(isFirst);
+                }else {
+                    count--;
+                    mSkipBtn.setText(count + "s 按鈕");
+                    mHandler.sendEmptyMessageDelayed(MESSAGE_SECOND,1000);
+                }
+
+
+            }
+        };
+
     }
+
 
     @Override
     public void initView() {
