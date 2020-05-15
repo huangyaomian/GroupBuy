@@ -60,7 +60,7 @@ public class SplashActivity extends BaseActivity {
                     jumpActivity(isFirst);
                 }else {
                     count--;
-                    mSkipBtn.setText(count + "s " + R.string.skip);
+                    mSkipBtn.setText(count + "s " + getString(R.string.skip));
                     mHandler.sendEmptyMessageDelayed(MESSAGE_SECOND,1000);
                 }
 
