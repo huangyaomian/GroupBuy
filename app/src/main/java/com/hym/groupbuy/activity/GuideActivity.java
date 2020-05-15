@@ -65,10 +65,10 @@ public class GuideActivity extends BaseActivity {
     @Override
     public void initData() {
         for (int i = 0; i < imgRes.length; i++) {
-            View inflate = getLayoutInflater().inflate(R.layout.guide_item, null);
-            ImageView ivGuide = inflate.findViewById(R.id.guide_item_iv);
+            View view = getLayoutInflater().inflate(R.layout.guide_item, null);
+            ImageView ivGuide = (ImageView)view.findViewById(R.id.guide_item_iv);
             ivGuide.setBackgroundResource(imgRes[i]);
-            mViewList.add(inflate);
+            mViewList.add(view);
         }
     }
 
