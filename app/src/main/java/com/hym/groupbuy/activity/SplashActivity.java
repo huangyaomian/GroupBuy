@@ -9,10 +9,12 @@ import android.view.contentcapture.ContentCaptureSessionId;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringDef;
 import androidx.core.app.ActivityCompat;
 
 import com.hym.groupbuy.MainActivity;
 import com.hym.groupbuy.R;
+import com.xuexiang.xui.widget.button.ButtonView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,7 +60,7 @@ public class SplashActivity extends BaseActivity {
                     jumpActivity(isFirst);
                 }else {
                     count--;
-                    mSkipBtn.setText(count + "s 按鈕");
+                    mSkipBtn.setText(count + "s " + R.string.skip);
                     mHandler.sendEmptyMessageDelayed(MESSAGE_SECOND,1000);
                 }
 
@@ -86,6 +88,7 @@ public class SplashActivity extends BaseActivity {
 
     @OnClick(R.id.skip_btn)
     public void onViewClicked() {
+        mHandler.removeMessages(MESSAGE_SECOND);
         jumpActivity(isFirst);
     }
 
@@ -100,7 +103,7 @@ public class SplashActivity extends BaseActivity {
             intent.setClass(SplashActivity.this, GuideActivity.class);
         } else {
 
-            intent.setClass(SplashActivity.this, GuideActivity.class);
+            intent.setClass(SplashActivity.this, MainActivity.class);
         }
         startActivity(intent);
         //可以设置界面之间的切换动画

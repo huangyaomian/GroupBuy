@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/theme_blue"
     tools:context=".activity.SplashActivity"
     >
 
@@ -16,7 +17,6 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/theme_blue"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,17 +26,18 @@
             android:id="@+id/skip_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3s 按钮"
+            android:text="3s 跳過"
             android:textSize="14sp"
-            android:textColor="@color/TextColor"
+            android:shadowColor="@color/theme_while"
+            android:textColor="@color/theme_while"
             android:layout_alignParentRight="true"
             android:layout_marginRight="25dp"
             android:layout_marginTop="40dp"
-            android:paddingRight="15dp"
-            android:paddingLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:background="@drawable/btn_selector"
+            android:background="@drawable/btn_bg_redio"
             android:gravity="center"
             />
 
