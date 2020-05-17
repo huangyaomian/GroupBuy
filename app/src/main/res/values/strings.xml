@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GroupBuy</string>
+    <string name="skip">跳過</string>
+    <string name="guide">歡迎光臨</string>
 </resources>

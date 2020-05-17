@@ -7,4 +7,5 @@
     <color name="theme_blue">#00c6e6</color>
     <color name="theme_while">#ffffff</color>
     <color name="theme_grey">#ebebeb</color>
+    <color name="skip_btn">#80000000</color>
 </resources>
