@@ -100,7 +100,7 @@ public class SplashActivity extends BaseActivity {
             intent.setClass(SplashActivity.this, GuideActivity.class);
         } else {
 
-            intent.setClass(SplashActivity.this, MainActivity.class);
+            intent.setClass(SplashActivity.this, GuideActivity.class);
         }
         startActivity(intent);
         //可以设置界面之间的切换动画
