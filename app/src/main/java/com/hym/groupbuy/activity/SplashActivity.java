@@ -5,16 +5,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.contentcapture.ContentCaptureSessionId;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringDef;
-import androidx.core.app.ActivityCompat;
 
 import com.hym.groupbuy.MainActivity;
 import com.hym.groupbuy.R;
-import com.xuexiang.xui.widget.button.ButtonView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,7 +99,7 @@ public class SplashActivity extends BaseActivity {
             intent.setClass(SplashActivity.this, GuideActivity.class);
         } else {
 
-            intent.setClass(SplashActivity.this, GuideActivity.class);
+            intent.setClass(SplashActivity.this, MainActivity.class);
         }
         startActivity(intent);
         //可以设置界面之间的切换动画

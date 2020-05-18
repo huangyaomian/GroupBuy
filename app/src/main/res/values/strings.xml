@@ -2,4 +2,11 @@
     <string name="app_name">GroupBuy</string>
     <string name="skip">跳過</string>
     <string name="guide">歡迎光臨</string>
+    <string name="mian_home">首页</string>
+    <string name="mian_around">周边</string>
+    <string name="main_mine">我的</string>
+    <string name="main_more">更多</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
