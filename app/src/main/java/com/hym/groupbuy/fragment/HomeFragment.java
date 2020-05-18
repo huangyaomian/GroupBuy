@@ -1,14 +1,20 @@
 package com.hym.groupbuy.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.hym.groupbuy.R;
+import com.hym.groupbuy.adapter.HomeBannerAdapter;
+import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,12 +27,19 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private BannerLayout mBannerHome;
+    private List<Integer> srcList;
+    private HomeBannerAdapter adapter;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    public HomeFragment(List<Integer> srcList) {
+        this.srcList = srcList;
+    }
+
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -59,7 +72,11 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        mBannerHome = view.findViewById(R.id.banner_home);
+
+        adapter = new HomeBannerAdapter(srcList);
+        mBannerHome.setAdapter(adapter);
+        return view;
     }
 }

@@ -69,4 +69,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation 'com.android.support:multidex:1.0.3'
+
 }

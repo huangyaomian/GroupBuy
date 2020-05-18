@@ -3,6 +3,7 @@ package com.hym.groupbuy.utils;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +22,7 @@ public class BottomNavigationViewHelper {
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                 //noinspection RestrictedApi
-                item.setShifting(false);
+                item.setShifting(true);
 //                item.setShiftingMode(false);
                 // set once again checked value, so view will be updated
                 //noinspection RestrictedApi
