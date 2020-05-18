@@ -37,8 +37,8 @@ public class MyGuideAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return mViewList.size();
-//        return mViewList == null?0:mViewList.size();
+//        return mViewList.size();
+        return mViewList == null?0:mViewList.size();
     }
 
     @Override
