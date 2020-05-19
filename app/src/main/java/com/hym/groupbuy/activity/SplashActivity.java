@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.hym.groupbuy.MainActivity;
 import com.hym.groupbuy.R;
@@ -31,8 +35,8 @@ public class SplashActivity extends BaseActivity {
      */
     private static final int MESSAGE_SECOND = 3;
 
-    private int count = 4;
 
+    private int count = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +52,16 @@ public class SplashActivity extends BaseActivity {
         sp = getPreferences(MODE_PRIVATE);
         isFirst = sp.getBoolean("isFirst", true);
         intent = new Intent();
-        mHandler = new Handler(){
+        mHandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
-                if (count == 1){
+                if (count == 1) {
                     jumpActivity(isFirst);
-                }else {
+                } else {
                     count--;
                     mSkipBtn.setText(count + "s " + getString(R.string.skip));
-                    mHandler.sendEmptyMessageDelayed(MESSAGE_SECOND,1000);
+                    mHandler.sendEmptyMessageDelayed(MESSAGE_SECOND, 1000);
                 }
 
 
@@ -90,9 +94,10 @@ public class SplashActivity extends BaseActivity {
 
     /**
      * 跳轉對應的activity
+     *
      * @param isFirst 是否第一次打開
      */
-    public void jumpActivity(boolean isFirst){
+    public void jumpActivity(boolean isFirst) {
         if (isFirst) {
             sp.edit().putBoolean("isFirst", false).commit();
             //如果用户是第一次安装应用并进入
@@ -105,6 +110,23 @@ public class SplashActivity extends BaseActivity {
         //可以设置界面之间的切换动画
 //                overridePendingTransition();
         finish();
+    }
+
+    @Override
+    public void onCreateCustomToolbar(Toolbar toolbar) {
+        super.onCreateCustomToolbar(toolbar);
+        toolbar.showOverflowMenu();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
 
