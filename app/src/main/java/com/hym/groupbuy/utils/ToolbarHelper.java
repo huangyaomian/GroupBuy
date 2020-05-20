@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.hym.groupbuy.R;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by hongkl on 16/7/12.
  */
@@ -39,6 +41,8 @@ public class ToolbarHelper {
 
         /**初始化toolbar**/
         initToolbar();
+
+//        ButterKnife.bind(get);
 
     }
 

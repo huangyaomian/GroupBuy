@@ -112,22 +112,7 @@ public class SplashActivity extends BaseActivity {
         finish();
     }
 
-    @Override
-    public void onCreateCustomToolbar(Toolbar toolbar) {
-        super.onCreateCustomToolbar(toolbar);
-        toolbar.showOverflowMenu();
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
 
 }

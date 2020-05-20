@@ -2,6 +2,8 @@ package com.hym.groupbuy.activity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
@@ -15,10 +17,12 @@ import com.xuexiang.xui.XUI;
 import com.xuexiang.xui.utils.StatusBarUtils;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
     private ToolbarHelper toolbarHelper;
+    private Unbinder mUnbinder;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,20 +32,39 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        super.setContentView(layoutResID);
-        ButterKnife.bind(this);
 
-        toolbarHelper = new ToolbarHelper(layoutResID,BaseActivity.this);
+        super.setContentView(layoutResID);
+
+
+
+        /*toolbarHelper = new ToolbarHelper(layoutResID,BaseActivity.this);
 
         Toolbar toolbar = toolbarHelper.getToolbar();
 
         setContentView(toolbarHelper.getmContentView());
 
-        setSupportActionBar(toolbar);
+
+
+        setSupportActionBar(toolbar);*/
 
         //**//**自定义一些自己的操作**//**//
-        onCreateCustomToolbar(toolbar);
+//        onCreateCustomToolbar(toolbar);
 
+//        mUnbinder = ButterKnife.bind(this);
+
+
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        mUnbinder = ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        mUnbinder = ButterKnife.bind(this);
     }
 
     public void onCreateCustomToolbar(Toolbar toolbar) {
@@ -56,6 +79,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
     }
 
     public abstract void init();
