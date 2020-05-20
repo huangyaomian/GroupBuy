@@ -18,33 +18,47 @@ import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
- *
+ * <p>
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
 
-    private BannerLayout mBannerHome;
+    @BindView(R.id.banner_home)
+    BannerLayout mBannerHome;
+
     private List<Integer> srcList;
     private HomeBannerAdapter adapter;
+    private List<View> viewList;
 
     public HomeFragment(List<Integer> srcList) {
         this.srcList = srcList;
     }
 
     public HomeFragment() {
+
     }
 
 
+    @Override
+    protected int setLayoutResourceID() {
+        return R.layout.fragment_home;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mBannerHome = view.findViewById(R.id.banner_home);
+    protected void initView() {
 
-        adapter = new HomeBannerAdapter(srcList);
         mBannerHome.setAdapter(adapter);
-        return view;
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void init() {
+        viewList =  new ArrayList<>();
+        adapter = new HomeBannerAdapter(srcList);
     }
 }

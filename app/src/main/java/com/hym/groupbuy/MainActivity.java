@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hym.groupbuy.activity.BaseActivity;
-import com.hym.groupbuy.adapter.HomeAdapter;
+import com.hym.groupbuy.adapter.MainAdapter;
 import com.hym.groupbuy.fragment.AroundFragment;
 import com.hym.groupbuy.fragment.HomeFragment;
 import com.hym.groupbuy.fragment.MineFragment;
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
@@ -70,8 +69,8 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new AroundFragment());
         mFragments.add(new MineFragment());
         mFragments.add(new MoreFragment());
-        HomeAdapter homeAdapter = new HomeAdapter(getSupportFragmentManager(), this, mFragments);
-        mMianViewpager.setAdapter(homeAdapter);
+        MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager(), this, mFragments);
+        mMianViewpager.setAdapter(mainAdapter);
 
     }
 

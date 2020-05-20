@@ -22,8 +22,8 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this, mContentView);
         mContext = getContext();
         init();
-        setUpView();
-        setUpData();
+        initView();
+        initData();
         return mContentView;
     }
 
@@ -35,17 +35,22 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 一些View的相关操作
      */
-    protected abstract void setUpView();
+    protected abstract void initView();
 
     /**
      * 一些Data的相关操作
      */
-    protected abstract void setUpData();
+    protected abstract void initData();
+
+    /**
+     * 做一些初始化的操作
+     */
+    protected abstract void init();
 
     /**
      * 此方法用于初始化成员变量及获取Intent传递过来的数据 * 注意：这个方法中不能调用所有的View，因为View还没有被初始化，要使用View在initView方法中调用
      */
-    protected void init() {
+    protected void initIntent() {
     }
 
     public View getContentView() {

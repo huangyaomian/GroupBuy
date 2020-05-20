@@ -11,12 +11,12 @@ import com.hym.groupbuy.MainActivity;
 
 import java.util.List;
 
-public class HomeAdapter extends FragmentPagerAdapter {
+public class MainAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragmentList;
     private Context mContext;
 
-    public HomeAdapter(FragmentManager fm, Context context, List<Fragment> listFragment){
+    public MainAdapter(FragmentManager fm, Context context, List<Fragment> listFragment){
         super(fm,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.mContext = context;
         this.mFragmentList = listFragment;

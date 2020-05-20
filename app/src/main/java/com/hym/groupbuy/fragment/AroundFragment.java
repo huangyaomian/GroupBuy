@@ -31,12 +31,17 @@ public class AroundFragment extends BaseFragment {
     }
 
     @Override
-    protected void setUpView() {
+    protected void initView() {
 
     }
 
     @Override
-    protected void setUpData() {
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void init() {
 
     }
 }
