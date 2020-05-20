@@ -70,8 +70,8 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new AroundFragment());
         mFragments.add(new MineFragment());
         mFragments.add(new MoreFragment());
-        HomeAdapter myAdapter = new HomeAdapter(getSupportFragmentManager(), this, mFragments);
-        mMianViewpager.setAdapter(myAdapter);
+        HomeAdapter homeAdapter = new HomeAdapter(getSupportFragmentManager(), this, mFragments);
+        mMianViewpager.setAdapter(homeAdapter);
 
     }
 

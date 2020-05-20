@@ -42,7 +42,6 @@ public class ToolbarHelper {
         /**初始化toolbar**/
         initToolbar();
 
-//        ButterKnife.bind(get);
 
     }
 

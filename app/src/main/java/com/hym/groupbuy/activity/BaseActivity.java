@@ -37,21 +37,17 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         mUnbinder = ButterKnife.bind(this);
 
-
-        /*toolbarHelper = new ToolbarHelper(layoutResID,BaseActivity.this);
+      /*  toolbarHelper = new ToolbarHelper(layoutResID,BaseActivity.this);
 
         Toolbar toolbar = toolbarHelper.getToolbar();
 
         setContentView(toolbarHelper.getmContentView());
-
-
 
         setSupportActionBar(toolbar);*/
 
         //**//**自定义一些自己的操作**//**//
 //        onCreateCustomToolbar(toolbar);
 
-//        mUnbinder = ButterKnife.bind(this);
 
 
     }
