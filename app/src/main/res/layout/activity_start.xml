@@ -37,9 +37,9 @@
             android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:background="@drawable/btn_bg_redio"
             android:gravity="center"
             />
+<!--        android:background="@drawable/btn_bg_redio"-->
 
     </RelativeLayout>
 

@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
         init();
         mHandler.sendEmptyMessage(MESSAGE_SECOND);
     }
