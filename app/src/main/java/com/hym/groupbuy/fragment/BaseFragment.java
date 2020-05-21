@@ -9,17 +9,22 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import butterknife.ButterKnife;
+import com.hym.groupbuy.nohttp.HttpListner;
+import com.hym.groupbuy.url.ContantsPool;
 
-public abstract class BaseFragment extends Fragment {
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+public abstract class BaseFragment extends Fragment implements ContantsPool, HttpListner<String> {
     private View mContentView;
     private Context mContext;
+    private Unbinder mUnbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContentView = inflater.inflate(setLayoutResourceID(), container, false);
-        ButterKnife.bind(this, mContentView);
+        mUnbinder = ButterKnife.bind(this, mContentView);
         mContext = getContext();
         init();
         initData();
@@ -59,6 +64,12 @@ public abstract class BaseFragment extends Fragment {
 
     public Context getMContext() {
         return mContext;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
 }

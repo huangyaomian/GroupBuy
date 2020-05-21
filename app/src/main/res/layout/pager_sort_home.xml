@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridView
+    <com.hym.groupbuy.widget.SortGridView
         android:id="@+id/home_sort_item_gv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

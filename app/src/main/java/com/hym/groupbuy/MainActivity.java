@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
 
     public void initBottomNavigation() {
         // 解决当item大于三个时，非平均布局问题
-        BottomNavigationViewHelper.disableShiftMode(navView);
+//        BottomNavigationViewHelper.disableShiftMode(navView);
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

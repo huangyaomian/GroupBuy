@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.hym.groupbuy.R;
 import com.hym.groupbuy.activity.BaseActivity;
+import com.yanzhenjie.nohttp.rest.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +43,16 @@ public class AroundFragment extends BaseFragment {
 
     @Override
     protected void init() {
+
+    }
+
+    @Override
+    public void onSucceed(int what, Response<String> response) {
+
+    }
+
+    @Override
+    public void onFailed(int what, Response<String> response) {
 
     }
 }
