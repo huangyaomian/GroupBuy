@@ -22,8 +22,8 @@ public abstract class BaseFragment extends Fragment {
         ButterKnife.bind(this, mContentView);
         mContext = getContext();
         init();
-        initView();
         initData();
+        initView();
         return mContentView;
     }
 

@@ -14,6 +14,10 @@ public class HomeSortAdapter extends PagerAdapter {
 
     private List<View> viewList;
 
+    public HomeSortAdapter(List<View> viewList) {
+        this.viewList = viewList;
+    }
+
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
@@ -36,6 +40,6 @@ public class HomeSortAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return false;
+        return view == object;
     }
 }
