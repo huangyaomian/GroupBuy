@@ -33,6 +33,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+//在使用 Vector Asset Studio 之前，您必须向 build.gradle 文件添加一条声明：
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 
 }
 

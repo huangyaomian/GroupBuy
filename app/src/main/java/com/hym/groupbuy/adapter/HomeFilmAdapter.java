@@ -1,6 +1,7 @@
 package com.hym.groupbuy.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,22 +13,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hym.groupbuy.R;
-import com.hym.groupbuy.bean.GoodsInfoBean;
+import com.hym.groupbuy.bean.HomeFilmBean;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.xuexiang.xui.utils.ResUtils.getResources;
 
 public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.MyviewHolder> {
 
 
 
-    private List<GoodsInfoBean.GoodlistBean> filmsList;
+    private List<HomeFilmBean.ResultBean> filmsList;
     private Context mContext;
 
-    public HomeFilmAdapter(List<GoodsInfoBean.GoodlistBean> goodsList, Context mContext) {
-        this.filmsList = goodsList;
+    public HomeFilmAdapter(List<HomeFilmBean.ResultBean> filmList, Context mContext) {
+        this.filmsList = filmList;
         this.mContext = mContext;
     }
 
@@ -35,16 +39,24 @@ public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.Myview
     @NonNull
     @Override
     public MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from (mContext).inflate (R.layout.item_goods_home,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_film_home, parent, false);
         MyviewHolder holder = new MyviewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
-        /*GoodsInfoBean.GoodlistBean goodsBean = filmsList.get(position);
-        Log.d("onBindViewHolder",goodsBean.getTitle());
-        holder.mItmeGoodsTitle.setText(goodsBean.getTitle());*/
+        HomeFilmBean.ResultBean resultBean = filmsList.get(position);
+        Log.d("onBindViewHolder", resultBean.getFilmName());
+        holder.mItemFilmName.setText(resultBean.getFilmName());
+        holder.mItemFilmReview.setText(resultBean.getGrade());
+        String[] picUrl = getResources().getStringArray(R.array.pic_url);
+        Random random = new Random();
+        int i = random.nextInt(16);
+        Uri uri = Uri.parse(picUrl[i]);
+//        Uri uri = Uri.parse("https://storage.qoo-static.com/file/37/097a1f38b191f2005631bd6bd8e91cd6.jpeg");
+        holder.mItemFilmIv.setImageURI(uri);
+
     }
 
     @Override
@@ -56,21 +68,14 @@ public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.Myview
 
 
     static class MyviewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.itme_goods_iv)
-        ImageView mItmeGoodsIv;
-        @BindView(R.id.item_goods_title)
-        TextView mItmeGoodsTitle;
-        @BindView(R.id.item_goods_short_title)
-        TextView mItemGoodsShortTitle;
-        @BindView(R.id.item_goods_price)
-        TextView mItemGoodsPrice;
-        @BindView(R.id.item_goods_value)
-        TextView mItemGoodsValue;
-        @BindView(R.id.item_goods_bought)
-        TextView mItemGoodsBought;
+        @BindView(R.id.itme_film_iv)
+        ImageView mItemFilmIv;
+        @BindView(R.id.item_film_name)
+        TextView mItemFilmName;
+        @BindView(R.id.item_film_review)
+        TextView mItemFilmReview;
         public MyviewHolder(View itemView) {
             super(itemView);
-            mItmeGoodsTitle = (TextView) itemView.findViewById(R.id.item_goods_title);
             ButterKnife.bind(this, itemView);
         }
     }

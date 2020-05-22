@@ -39,5 +39,25 @@
         <item>@mipmap/icon_home_all_0</item>
     </array>
 
+    <array name="pic_url">
+        <item>https://storage.qoo-static.com/file/37/097a1f38b191f2005631bd6bd8e91cd6.jpeg</item>
+        <item>https://img.qoo-static.com/file/12/66f6050069635a0662dfda20a38bfbbe.jpeg</item>
+        <item>https://img.qoo-static.com/file/12/43b2cb1bbe3034fe787b8153516cba38.jpeg</item>
+        <item>https://img.qoo-static.com/file/12/f90c863f2bc18a4bc4c550d3e63cfe20.jpeg</item>
+        <item>https://img.qoo-static.com/file/37/f28991ee3e55ce034648b866a60c085c.jpeg</item>
+        <item>https://storage.qoo-static.com/file/37/6acd4ea552919d207dff229c235b14b8.jpeg</item>
+        <item>https://img.qoo-static.com/file/37/dc038564cf36dde57c09a0dac47a39ab.png</item>
+        <item>https://img.qoo-static.com/file/37/4e8088c91f728361c75bf26ad8a6b780.png</item>
+        <item>https://img.qoo-static.com/file/37/0f4c5a33365d5c3a232bbad6aa20b681.png</item>
+        <item>https://img.qoo-static.com/file/50/0002e3935cc0723be8cb0ba9f09c36ac.png</item>
+        <item>https://img.qoo-static.com/file/37/2a560df6b6ae70f8e6a087bf325a9bc5.png</item>
+        <item>https://img.qoo-static.com/file/12/66922b1ffe8f01a3abd4db907c882ff6.png</item>
+        <item>https://img.qoo-static.com/file/37/7341965052df4f7e489a463908bb3325.png</item>
+        <item>https://img.qoo-static.com/file/37/500f04a8d258f9e2d1fd6b5a65e6e76c.png</item>
+        <item>https://img.qoo-static.com/file/37/6abcb5611017924e7ff9eab8d9b6be0f.png</item>
+        <item>https://img.qoo-static.com/file/12/adc599c7ed86ee350941112bcb076fc0.jpg</item>
+        <item>https://img.qoo-static.com/file/19/ad6ec5f2f2815ae7ab58d109a093cf5c.jpg</item>
+    </array>
+
 
 </resources>

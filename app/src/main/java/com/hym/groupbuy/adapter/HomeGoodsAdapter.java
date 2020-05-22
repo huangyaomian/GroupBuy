@@ -1,12 +1,12 @@
 package com.hym.groupbuy.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,9 +17,12 @@ import com.hym.groupbuy.R;
 import com.hym.groupbuy.bean.GoodsInfoBean;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.xuexiang.xui.utils.ResUtils.getResources;
 
 public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.MyviewHolder> {
 
@@ -45,9 +48,17 @@ public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.Myvi
     @Override
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
         GoodsInfoBean.GoodlistBean goodsBean = goodsList.get(position);
-        Log.d("onBindViewHolder",goodsBean.getTitle());
+//        Log.d("onBindViewHolder",goodsBean.getTitle());
         holder.mItmeGoodsTitle.setText(goodsBean.getTitle());
-        Uri uri = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png");
+        holder.mItemGoodsShortTitle.setText(goodsList.get(position).getTitle());
+        holder.mItemGoodsPrice.setText("￥" +goodsList.get(position).getPrice());
+        holder.mItemGoodsValue.setText("￥" +goodsList.get(position).getValue());
+        holder.mItemGoodsValue.setPaintFlags(holder.mItemGoodsValue.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.mItemGoodsBought.setText("已售:" + goodsList.get(position).getBought());
+        String[] picUrl = getResources().getStringArray(R.array.pic_url);
+        Random random = new Random();
+        int i = random.nextInt(16);
+        Uri uri = Uri.parse(picUrl[i]);
         holder.mItmeGoodsIv.setImageURI(uri);
     }
 
@@ -58,7 +69,7 @@ public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.Myvi
 
 
     static class MyviewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.itme_goods_iv)
+        @BindView(R.id.item_goods_iv)
         SimpleDraweeView mItmeGoodsIv;
         @BindView(R.id.item_goods_title)
         TextView mItmeGoodsTitle;

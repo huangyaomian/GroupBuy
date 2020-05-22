@@ -5,21 +5,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.gson.Gson;
-import com.hym.groupbuy.MainActivity;
 import com.hym.groupbuy.R;
 import com.hym.groupbuy.adapter.HomeBannerAdapter;
+import com.hym.groupbuy.adapter.HomeFilmAdapter;
 import com.hym.groupbuy.adapter.HomeGoodsAdapter;
 import com.hym.groupbuy.adapter.HomeSortAdapter;
 import com.hym.groupbuy.adapter.HomeSortItemAdapter;
 import com.hym.groupbuy.bean.GoodsInfoBean;
+import com.hym.groupbuy.bean.HomeFilmBean;
 import com.hym.groupbuy.bean.HomeSortBean;
 import com.hym.groupbuy.nohttp.CallServer;
 import com.hym.groupbuy.widget.WrapContentHeightViewPager;
@@ -48,14 +50,30 @@ public class HomeFragment extends BaseFragment {
     WrapContentHeightViewPager homeSortVp;
     @BindView(R.id.home_rv)
     RecyclerView mHomeRv;
+    @BindView(R.id.home_film)
+    TextView mHomeFilm;
+    @BindView(R.id.home_film_rv)
+    RecyclerView mHomeFilmRv;
+    @BindView(R.id.home_film_ll)
+    LinearLayout mHomeFilmLl;
+    @BindView(R.id.home_recommend)
+    TextView mHomeRecommend;
+    @BindView(R.id.home_recommend_ll)
+    LinearLayout mHomeRecommendLl;
 
     private List<Integer> srcList;
     private HomeBannerAdapter mHomeBannerAdapter;
     private List<View> viewList;
+    private Gson mGson;
     /**
      * 自定义的商品存放容器
      **/
     private List<GoodsInfoBean.GoodlistBean> mGoodslist;
+
+    /**
+     * 自定义的電影存放容器
+     **/
+    private List<HomeFilmBean.ResultBean> mFilmlist;
 
 
     /**
@@ -130,6 +148,12 @@ public class HomeFragment extends BaseFragment {
         recommendRequest.addHeader(APIId, APIIdKey);
         recommendRequest.addHeader(contentType, contentTypeKey);
         CallServer.getInstance().add(getActivity(), 0, recommendRequest, this, true, true);
+        /**電影**/
+        Request<String> filmRequest = NoHttp.createStringRequest(spFilmURL, RequestMethod.GET);
+        filmRequest.addHeader(appId, appIdKey);
+        filmRequest.addHeader(APIId, APIIdKey);
+        filmRequest.addHeader(contentType, contentTypeKey);
+        CallServer.getInstance().add(getActivity(), 1, filmRequest, this, true, true);
     }
 
     @Override
@@ -139,21 +163,36 @@ public class HomeFragment extends BaseFragment {
         pagerTwoSortList = new ArrayList<>();
         mHomeBannerAdapter = new HomeBannerAdapter(srcList);
         mGoodslist = new ArrayList<>();
+        mFilmlist = new ArrayList<>();
     }
 
     @Override
     public void onSucceed(int what, Response<String> response) {
+        mGson = new Gson();
+        LinearLayoutManager layoutManager;
         switch (what) {
             case 0:
-                Gson gson = new Gson();
-                GoodsInfoBean goodsInfo = gson.fromJson(response.get(), GoodsInfoBean.class);
-                Log.d("onSucceed",response.get());
-                List<GoodsInfoBean.GoodlistBean> goodlist = goodsInfo.getGoodlist();
-                mGoodslist.addAll(goodlist);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                mHomeRecommend.setVisibility(View.VISIBLE);
+                GoodsInfoBean goodsInfo = mGson.fromJson(response.get(), GoodsInfoBean.class);
+//                Log.d("onSucceed", response.get());
+                List<GoodsInfoBean.GoodlistBean> goodsList = goodsInfo.getGoodlist();
+                mGoodslist.addAll(goodsList);
+                layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 mHomeRv.setLayoutManager(layoutManager);
                 mHomeRv.setAdapter(new HomeGoodsAdapter(mGoodslist, getActivity()));
                 mHomeRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+                break;
+            case 1:
+                mHomeFilm.setVisibility(View.VISIBLE);
+                Gson gson1 = new Gson();
+                HomeFilmBean homeFilmBean = gson1.fromJson(response.get(), HomeFilmBean.class);
+                Log.d("onSucceed", response.get());
+                List<HomeFilmBean.ResultBean> result = homeFilmBean.getResult();
+                mFilmlist.addAll(result);
+                layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+                mHomeFilmRv.setLayoutManager(layoutManager);
+                mHomeFilmRv.setAdapter(new HomeFilmAdapter(mFilmlist, getActivity()));
+//                mHomeFilmRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
                 break;
         }
     }

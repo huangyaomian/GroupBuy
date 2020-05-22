@@ -21,5 +21,8 @@ public interface ContantsPool {
    /**猜你喜欢**/
    String spRecommendURL = baseUrl + "/goodlist/70dfdc12cc";
 
+   /**電影**/
+   String spFilmURL = baseUrl + "/film/e987ff03a5";
+
 
 }
