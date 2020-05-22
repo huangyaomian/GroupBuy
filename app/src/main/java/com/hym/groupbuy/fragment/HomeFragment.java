@@ -181,6 +181,7 @@ public class HomeFragment extends BaseFragment {
                 mHomeRv.setLayoutManager(layoutManager);
                 mHomeRv.setAdapter(new HomeGoodsAdapter(mGoodslist, getActivity()));
                 mHomeRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+//                mHomeRv.setonclick
                 break;
             case 1:
                 mHomeFilm.setVisibility(View.VISIBLE);
