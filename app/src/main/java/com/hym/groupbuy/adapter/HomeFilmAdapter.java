@@ -1,7 +1,6 @@
 package com.hym.groupbuy.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.hym.groupbuy.R;
 import com.hym.groupbuy.bean.GoodsInfoBean;
 
@@ -21,15 +19,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.MyviewHolder> {
+public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.MyviewHolder> {
 
 
 
-    private List<GoodsInfoBean.GoodlistBean> goodsList;
+    private List<GoodsInfoBean.GoodlistBean> filmsList;
     private Context mContext;
 
-    public HomeGoodsAdapter(List<GoodsInfoBean.GoodlistBean> goodsList, Context mContext) {
-        this.goodsList = goodsList;
+    public HomeFilmAdapter(List<GoodsInfoBean.GoodlistBean> goodsList, Context mContext) {
+        this.filmsList = goodsList;
         this.mContext = mContext;
     }
 
@@ -44,22 +42,22 @@ public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.Myvi
 
     @Override
     public void onBindViewHolder(@NonNull MyviewHolder holder, int position) {
-        GoodsInfoBean.GoodlistBean goodsBean = goodsList.get(position);
+        /*GoodsInfoBean.GoodlistBean goodsBean = filmsList.get(position);
         Log.d("onBindViewHolder",goodsBean.getTitle());
-        holder.mItmeGoodsTitle.setText(goodsBean.getTitle());
-        Uri uri = Uri.parse("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png");
-        holder.mItmeGoodsIv.setImageURI(uri);
+        holder.mItmeGoodsTitle.setText(goodsBean.getTitle());*/
     }
 
     @Override
     public int getItemCount() {
-        return goodsList != null ? goodsList.size() : 0;
+//        return goodsList != null ? goodsList.size() : 0;
+        return filmsList.size();
+
     }
 
 
     static class MyviewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.itme_goods_iv)
-        SimpleDraweeView mItmeGoodsIv;
+        ImageView mItmeGoodsIv;
         @BindView(R.id.item_goods_title)
         TextView mItmeGoodsTitle;
         @BindView(R.id.item_goods_short_title)
