@@ -32,12 +32,24 @@
             app:layout_constraintTop_toBottomOf="@id/banner_home"
             />
 
+        <com.hym.groupbuy.widget.ViewPagerIndicator
+            android:id="@+id/home_sort_vp_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/home_sort_vp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/home_sort_vp"
+            android:paddingBottom="3dp"
+            app:numbers="2"
+            app:radius="8"
+            app:foreColor="@color/theme_blue"/>
+
         <LinearLayout
             android:id="@+id/home_film_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/home_sort_vp">
+            app:layout_constraintTop_toBottomOf="@+id/home_sort_vp_indicator">
             <TextView
                 android:visibility="gone"
                 android:id="@+id/home_film"

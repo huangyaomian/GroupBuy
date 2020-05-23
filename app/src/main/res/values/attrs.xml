@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="numbers" format="integer"></attr>
+        <attr name="radius" format="integer"></attr>
+        <attr name="background_color" format="reference"></attr>
+        <attr name="foreColor" format="reference"></attr>
+    </declare-styleable>
+
+</resources>

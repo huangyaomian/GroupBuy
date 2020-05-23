@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.gson.Gson;
 import com.hym.groupbuy.R;
@@ -24,6 +25,7 @@ import com.hym.groupbuy.bean.GoodsInfoBean;
 import com.hym.groupbuy.bean.HomeFilmBean;
 import com.hym.groupbuy.bean.HomeSortBean;
 import com.hym.groupbuy.nohttp.CallServer;
+import com.hym.groupbuy.widget.ViewPagerIndicator;
 import com.hym.groupbuy.widget.WrapContentHeightViewPager;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 import com.yanzhenjie.nohttp.NoHttp;
@@ -60,6 +62,8 @@ public class HomeFragment extends BaseFragment {
     TextView mHomeRecommend;
     @BindView(R.id.home_recommend_ll)
     LinearLayout mHomeRecommendLl;
+    @BindView(R.id.home_sort_vp_indicator)
+    ViewPagerIndicator homeSortVpIndicator;
 
     private List<Integer> srcList;
     private HomeBannerAdapter mHomeBannerAdapter;
@@ -103,6 +107,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initSortGridView() {
+
         View pagerOne = getLayoutInflater().inflate(R.layout.pager_sort_home, null);
         GridView gridViewOne = pagerOne.findViewById(R.id.home_sort_item_gv);
         gridViewOne.setAdapter(new HomeSortItemAdapter(pagerOneSortList, getMContext()));
@@ -125,6 +130,22 @@ public class HomeFragment extends BaseFragment {
         viewList.add(pagerOne);
         viewList.add(pagerTwo);
         homeSortVp.setAdapter(new HomeSortAdapter(viewList));
+        homeSortVp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                homeSortVpIndicator.setOffX(position,positionOffset);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
@@ -144,15 +165,9 @@ public class HomeFragment extends BaseFragment {
         }
         /**猜你喜欢的请求**/
         Request<String> recommendRequest = NoHttp.createStringRequest(spRecommendURL, RequestMethod.GET);
-        recommendRequest.addHeader(appId, appIdKey);
-        recommendRequest.addHeader(APIId, APIIdKey);
-        recommendRequest.addHeader(contentType, contentTypeKey);
         CallServer.getInstance().add(getActivity(), 0, recommendRequest, this, true, true);
         /**電影**/
         Request<String> filmRequest = NoHttp.createStringRequest(spFilmURL, RequestMethod.GET);
-        filmRequest.addHeader(appId, appIdKey);
-        filmRequest.addHeader(APIId, APIIdKey);
-        filmRequest.addHeader(contentType, contentTypeKey);
         CallServer.getInstance().add(getActivity(), 1, filmRequest, this, true, true);
     }
 
