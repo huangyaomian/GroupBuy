@@ -40,6 +40,11 @@ public class AroundFragment extends BaseFragment {
     }
 
     @Override
+    protected void initEvent() {
+
+    }
+
+    @Override
     public void onSucceed(int what, Response<String> response) {
 
     }

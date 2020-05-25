@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hym.groupbuy.R;
 import com.hym.groupbuy.bean.GoodsInfoBean;
+import com.hym.groupbuy.fragment.HomeFragment;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import butterknife.BindView;
@@ -24,12 +26,23 @@ import butterknife.ButterKnife;
 
 import static com.xuexiang.xui.utils.ResUtils.getResources;
 
-public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.MyviewHolder> {
+public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.MyviewHolder> implements View.OnClickListener {
 
 
 
     private List<GoodsInfoBean.GoodlistBean> goodsList;
     private Context mContext;
+
+    // 利用接口 -> 给RecyclerView设置点击事件
+    private ItemClickListener mItemClickListener ;
+    public interface ItemClickListener{
+        public void onItemClick(int position) ;
+    }
+    public void setOnItemClickListener(ItemClickListener itemClickListener){
+        this.mItemClickListener = itemClickListener ;
+
+    }
+
 
     public HomeGoodsAdapter(List<GoodsInfoBean.GoodlistBean> goodsList, Context mContext) {
         this.goodsList = goodsList;
@@ -60,12 +73,33 @@ public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.Myvi
         int i = random.nextInt(16);
         Uri uri = Uri.parse(picUrl[i]);
         holder.mItmeGoodsIv.setImageURI(uri);
+
+        // 点击事件一般都写在绑定数据这里，当然写到上边的创建布局时候也是可以的
+        if (mItemClickListener != null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 这里利用回调来给RecyclerView设置点击事件
+                    mItemClickListener.onItemClick(position);
+                }
+            });
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
         return goodsList != null ? goodsList.size() : 0;
     }
+
+
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
 
 
     static class MyviewHolder extends RecyclerView.ViewHolder {
@@ -86,7 +120,14 @@ public class HomeGoodsAdapter extends RecyclerView.Adapter<HomeGoodsAdapter.Myvi
             mItmeGoodsTitle = (TextView) itemView.findViewById(R.id.item_goods_title);
             ButterKnife.bind(this, itemView);
         }
+
+
+
+
     }
+
+
+
 
 
 }

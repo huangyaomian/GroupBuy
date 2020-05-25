@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -27,6 +28,12 @@ import com.hym.groupbuy.bean.HomeSortBean;
 import com.hym.groupbuy.nohttp.CallServer;
 import com.hym.groupbuy.widget.ViewPagerIndicator;
 import com.hym.groupbuy.widget.WrapContentHeightViewPager;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.RequestMethod;
@@ -35,6 +42,7 @@ import com.yanzhenjie.nohttp.rest.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -64,11 +72,16 @@ public class HomeFragment extends BaseFragment {
     LinearLayout mHomeRecommendLl;
     @BindView(R.id.home_sort_vp_indicator)
     ViewPagerIndicator homeSortVpIndicator;
+    @BindView(R.id.home_refreshLayout)
+    RefreshLayout  mHomeRefreshLayout;
 
     private List<Integer> srcList;
     private HomeBannerAdapter mHomeBannerAdapter;
     private List<View> viewList;
     private Gson mGson;
+
+    private Request<String> recommendRequest;
+    private Request<String> filmRequest;
     /**
      * 自定义的商品存放容器
      **/
@@ -133,7 +146,7 @@ public class HomeFragment extends BaseFragment {
         homeSortVp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                homeSortVpIndicator.setOffX(position,positionOffset);
+                homeSortVpIndicator.setOffX(position, positionOffset);
             }
 
             @Override
@@ -164,10 +177,10 @@ public class HomeFragment extends BaseFragment {
             }
         }
         /**猜你喜欢的请求**/
-        Request<String> recommendRequest = NoHttp.createStringRequest(spRecommendURL, RequestMethod.GET);
+        recommendRequest = NoHttp.createStringRequest(spRecommendURL, RequestMethod.GET);
         CallServer.getInstance().add(getActivity(), 0, recommendRequest, this, true, true);
         /**電影**/
-        Request<String> filmRequest = NoHttp.createStringRequest(spFilmURL, RequestMethod.GET);
+        filmRequest = NoHttp.createStringRequest(spFilmURL, RequestMethod.GET);
         CallServer.getInstance().add(getActivity(), 1, filmRequest, this, true, true);
     }
 
@@ -182,6 +195,19 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    protected void initEvent() {
+        mHomeRefreshLayout.setRefreshHeader(new ClassicsHeader(getActivity()));//设置Header
+        mHomeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                CallServer.getInstance().add(getActivity(), 0, recommendRequest, HomeFragment.this, true, true);
+                CallServer.getInstance().add(getActivity(), 1, filmRequest, HomeFragment.this, true, true);
+            }
+        });
+
+    }
+
+    @Override
     public void onSucceed(int what, Response<String> response) {
         mGson = new Gson();
         LinearLayoutManager layoutManager;
@@ -191,12 +217,21 @@ public class HomeFragment extends BaseFragment {
                 GoodsInfoBean goodsInfo = mGson.fromJson(response.get(), GoodsInfoBean.class);
 //                Log.d("onSucceed", response.get());
                 List<GoodsInfoBean.GoodlistBean> goodsList = goodsInfo.getGoodlist();
+                mGoodslist.clear();
                 mGoodslist.addAll(goodsList);
                 layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                 mHomeRv.setLayoutManager(layoutManager);
-                mHomeRv.setAdapter(new HomeGoodsAdapter(mGoodslist, getActivity()));
+                HomeGoodsAdapter homeGoodsAdapter = new HomeGoodsAdapter(mGoodslist, getActivity());
+                mHomeRv.setAdapter(homeGoodsAdapter);
                 mHomeRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-//                mHomeRv.setonclick
+                // 设置数据后就要给RecyclerView设置点击事件
+                homeGoodsAdapter.setOnItemClickListener(new HomeGoodsAdapter.ItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        // 这里本来是跳转页面 ，我们就在这里直接让其弹toast来演示
+                        Toast.makeText(getActivity() , mGoodslist.get(position).getShort_title() , Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
             case 1:
                 mHomeFilm.setVisibility(View.VISIBLE);
@@ -204,6 +239,7 @@ public class HomeFragment extends BaseFragment {
                 HomeFilmBean homeFilmBean = gson1.fromJson(response.get(), HomeFilmBean.class);
                 Log.d("onSucceed", response.get());
                 List<HomeFilmBean.ResultBean> result = homeFilmBean.getResult();
+                mFilmlist.clear();
                 mFilmlist.addAll(result);
                 layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 mHomeFilmRv.setLayoutManager(layoutManager);
@@ -211,10 +247,30 @@ public class HomeFragment extends BaseFragment {
 //                mHomeFilmRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
                 break;
         }
+        mHomeRefreshLayout.finishRefresh();//结束刷新
     }
 
     @Override
     public void onFailed(int what, Response<String> response) {
 
+    }
+
+
+
+    /**
+     * 定义RecyclerView选项单击事件的回调接口
+     */
+    public interface OnItemClickListener{
+        //也可以不在这个activity或者是fragment中来声明接口，可以在项目中单独创建一个interface，就改成static就OK
+        //参数（父组件，当前单击的View,单击的View的位置，数据）
+        void onItemClick(RecyclerView parent,View view, int position, Map data);
+        // void onItemLongClick(View view);类似，我这里没用就不写了
+        //
+        //这个data是List中放的数据类型，因为我这里是private List<Map> mapList;这样一个
+        //然后我的每个item是这样的：
+        //        HashMap map =new HashMap();
+        //        map.put("img",R.drawable.delete);
+        //        map.put("text","x1");
+        //所以我的是map类型的，那如果是item中只有text的话比如List<String>，那么data就改成String类型
     }
 }
