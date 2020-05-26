@@ -243,8 +243,16 @@ public class HomeFragment extends BaseFragment {
                 mFilmlist.addAll(result);
                 layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
                 mHomeFilmRv.setLayoutManager(layoutManager);
-                mHomeFilmRv.setAdapter(new HomeFilmAdapter(mFilmlist, getActivity()));
-//                mHomeFilmRv.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+                HomeFilmAdapter homeFilmAdapter = new HomeFilmAdapter(mFilmlist, getActivity());
+                mHomeFilmRv.setAdapter(homeFilmAdapter);
+                // 设置数据后就要给RecyclerView设置点击事件
+                homeFilmAdapter.setOnItemClickListener(new HomeFilmAdapter.ItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        // 这里本来是跳转页面 ，我们就在这里直接让其弹toast来演示
+                        Toast.makeText(getActivity() , mFilmlist.get(position).getFilmName() , Toast.LENGTH_SHORT).show();
+                    }
+                });
                 break;
         }
         mHomeRefreshLayout.finishRefresh();//结束刷新

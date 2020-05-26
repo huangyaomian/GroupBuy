@@ -26,6 +26,17 @@ import static com.xuexiang.xui.utils.ResUtils.getResources;
 public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.MyviewHolder> {
 
 
+    private ItemClickListener mItemClickListener;
+
+
+
+    public interface ItemClickListener{
+        public void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(ItemClickListener itemClickListener) {
+        this.mItemClickListener = itemClickListener;
+    }
 
     private List<HomeFilmBean.ResultBean> filmsList;
     private Context mContext;
@@ -56,6 +67,14 @@ public class HomeFilmAdapter extends RecyclerView.Adapter<HomeFilmAdapter.Myview
         Uri uri = Uri.parse(picUrl[i]);
 //        Uri uri = Uri.parse("https://storage.qoo-static.com/file/37/097a1f38b191f2005631bd6bd8e91cd6.jpeg");
         holder.mItemFilmIv.setImageURI(uri);
+        if (mItemClickListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mItemClickListener.onItemClick(position);
+                }
+            });
+        }
 
     }
 
