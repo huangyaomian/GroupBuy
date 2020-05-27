@@ -11,6 +11,9 @@
     <!-- bmob application theme. -->
     <style name="AppTheme1" parent="XUITheme.Phone" >
         <item name="android:windowAnimationStyle">@style/Animation</item>
+        <item name="colorPrimary">@color/theme_while</item>
+        <item name="colorPrimaryDark">@color/theme_while</item>
+        <item name="colorAccent">@color/theme_while</item>
     </style>
 
 
