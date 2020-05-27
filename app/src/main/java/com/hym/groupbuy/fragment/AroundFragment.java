@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.hym.groupbuy.R;
 import com.yanzhenjie.nohttp.rest.Response;
@@ -205,19 +204,19 @@ public class AroundFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.around_sort_ll:
                 aroundSortTv.setTextColor(getResources().getColor(R.color.theme_blue));
-                mPopListview.setAdapter(mMenuAdapter1);
+                popListLv.setAdapter(mMenuAdapter1);
                 popupMenu.showAsDropDown(aroundSortLl, 0, 2);
                 menuIndex = 0;
                 break;
             case R.id.around_business_ll:
                 aroundBusinessTv.setTextColor(getResources().getColor(R.color.theme_blue));
-                mPopListview.setAdapter(mMenuAdapter2);
+                popListLv.setAdapter(mMenuAdapter2);
                 popupMenu.showAsDropDown(aroundBusinessLl, 0, 2);
                 menuIndex = 1;
                 break;
             case R.id.around_default_ll:
                 aroundDefaultTv.setTextColor(getResources().getColor(R.color.theme_blue));
-                mPopListview.setAdapter(mMenuAdapter3);
+                popListLv.setAdapter(mMenuAdapter3);
                 popupMenu.showAsDropDown(aroundDefaultLl, 0, 2);
                 menuIndex = 2;
                 break;
