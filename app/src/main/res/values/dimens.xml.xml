@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="design_bottom_navigation_active_item_max_width">168dp</dimen>//选中时的最大宽度
+    <dimen name="design_bottom_navigation_active_text_size">9sp</dimen>//选中时的字体大小
+    <dimen name="design_bottom_navigation_elevation">7dp</dimen>//阴影的大小
+    <dimen name="design_bottom_navigation_height">48dp</dimen>//高度
+    <dimen name="design_bottom_navigation_item_max_width">48dp</dimen>//未选中的最大宽度
+    <dimen name="design_bottom_navigation_item_min_width">48dp</dimen>//未选中的最小的宽度
+    <dimen name="design_bottom_navigation_margin">8dp</dimen>//icon与文本之间的间距
+    <dimen name="design_bottom_navigation_shadow_height">1dp</dimen>//阴影高度
+    <dimen name="design_bottom_navigation_text_size">9sp</dimen>//未选中时的字体大小
+</resources>

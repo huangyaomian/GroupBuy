@@ -2,6 +2,8 @@ package com.hym.groupbuy.fragment;
 
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -75,7 +77,7 @@ public class AroundFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        initPopMenu();
     }
 
     @Override
@@ -122,7 +124,7 @@ public class AroundFragment extends BaseFragment {
         View popView = LayoutInflater.from(getActivity()).inflate(R.layout.popwin_supplier_list, null);
         popListLv = popView.findViewById(R.id.popwin_supplier_list_lv);
         popupMenu = new PopupWindow(popView, LinearLayout.LayoutParams.MATCH_PARENT
-                , LinearLayout.LayoutParams.MATCH_PARENT);
+                , LinearLayout.LayoutParams.WRAP_CONTENT);
         popupMenu.setOutsideTouchable(true);
         popupMenu.setBackgroundDrawable(new BitmapDrawable());
         popupMenu.setFocusable(true);
@@ -130,9 +132,12 @@ public class AroundFragment extends BaseFragment {
         popupMenu.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                aroundSortTv.setTextColor(getResources().getColor(R.color.theme_blue));
-                aroundBusinessTv.setTextColor(getResources().getColor(R.color.theme_blue));
-                aroundDefaultTv.setTextColor(getResources().getColor(R.color.theme_blue));
+                aroundBusinessIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_collapse));
+                aroundSortIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_collapse));
+                aroundDefaultIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_collapse));
+//                aroundSortTv.setTextColor(getResources().getColor(R.color.theme_blue));
+//                aroundBusinessTv.setTextColor(getResources().getColor(R.color.theme_blue));
+//                aroundDefaultTv.setTextColor(getResources().getColor(R.color.theme_blue));
             }
         });
 
@@ -163,18 +168,19 @@ public class AroundFragment extends BaseFragment {
                 switch (menuIndex) {
                     case 0:
                         String currentProduct = mMenuData1.get(i).get("name");
-                        mSupplierListTitleTv.setText(currentProduct);
-                        mProductTv.setText(currentProduct);
+//                        mSupplierListTitleTv.setText(currentProduct);
+                        aroundSortTv.setText(currentProduct);
+
                         break;
                     case 1:
                         String currentSort = mMenuData2.get(i).get("name");
-                        mSupplierListTitleTv.setText(currentSort);
-                        mSortTv.setText(currentSort);
+//                        mSupplierListTitleTv.setText(currentSort);
+                        aroundBusinessTv.setText(currentSort);
                         break;
                     case 2:
                         String currentAct = mMenuData3.get(i).get("name");
-                        mSupplierListTitleTv.setText(currentAct);
-                        mActivityTv.setText(currentAct);
+//                        mSupplierListTitleTv.setText(currentAct);
+                        aroundDefaultTv.setText(currentAct);
                         break;
                 }
             }
@@ -203,19 +209,22 @@ public class AroundFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.around_sort_ll:
-                aroundSortTv.setTextColor(getResources().getColor(R.color.theme_blue));
+                aroundSortIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_unfold));
+//                aroundSortTv.setTextColor(getResources().getColor(R.color.theme_blue));
                 popListLv.setAdapter(mMenuAdapter1);
-                popupMenu.showAsDropDown(aroundSortLl, 0, 2);
+                popupMenu.showAsDropDown(aroundSortLl, 0, 0);
                 menuIndex = 0;
                 break;
             case R.id.around_business_ll:
-                aroundBusinessTv.setTextColor(getResources().getColor(R.color.theme_blue));
+                aroundBusinessIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_unfold));
+//                aroundBusinessTv.setTextColor(getResources().getColor(R.color.theme_blue));
                 popListLv.setAdapter(mMenuAdapter2);
                 popupMenu.showAsDropDown(aroundBusinessLl, 0, 2);
                 menuIndex = 1;
                 break;
             case R.id.around_default_ll:
-                aroundDefaultTv.setTextColor(getResources().getColor(R.color.theme_blue));
+                aroundDefaultIv.setBackground(getResources().getDrawable(R.drawable.vector_drawable_unfold));
+//                aroundDefaultTv.setTextColor(getResources().getColor(R.color.theme_blue));
                 popListLv.setAdapter(mMenuAdapter3);
                 popupMenu.showAsDropDown(aroundDefaultLl, 0, 2);
                 menuIndex = 2;

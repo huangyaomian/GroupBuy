@@ -97,7 +97,7 @@
 
         <TextView
             android:id="@+id/around_sort_tv"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/theme_grey"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -108,8 +108,8 @@
         <ImageView
             android:id="@+id/around_sort_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/vector_drawable_collapse"
+            android:layout_height="wrap_content"
+            android:background="@drawable/vector_drawable_collapse"
             android:gravity="center"/>
     </LinearLayout>
 
@@ -134,7 +134,7 @@
 
         <TextView
             android:id="@+id/around_business_tv"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/theme_grey"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -145,8 +145,8 @@
         <ImageView
             android:id="@+id/around_business_iv"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/vector_drawable_collapse"
+            android:layout_height="wrap_content"
+            android:background="@drawable/vector_drawable_collapse"
             android:gravity="center"/>
     </LinearLayout>
     <View
@@ -169,7 +169,7 @@
 
             <TextView
                 android:id="@+id/around_default_tv"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/theme_grey"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -180,8 +180,8 @@
             <ImageView
                 android:id="@+id/around_default_iv"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/vector_drawable_collapse"
+                android:layout_height="wrap_content"
+                android:background="@drawable/vector_drawable_collapse"
                 android:gravity="center"/>
         </LinearLayout>
         <!--<View
